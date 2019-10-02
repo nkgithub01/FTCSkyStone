@@ -52,11 +52,25 @@ public class DriveSimple extends OpMode{
     public void loop() {
         //Drive the robot
 
+        //also i realized im stupid and this might not work bc if the stick is in top right corner
+        // both x and y are equal to one
+        //also my spanish homework is so boring and i shud probly be doing that instead
+
         //Driving
         leftFront.setPower(gamepad1.left_stick_x + gamepad1.left_stick_y);
         rightFront.setPower(gamepad1.left_stick_x - gamepad1.left_stick_y);
         leftBack.setPower(-gamepad1.left_stick_x + gamepad1.left_stick_y);
         rightBack.setPower(-gamepad1.left_stick_x - gamepad1.left_stick_y);
+
+
+
+        /*//Nitin: for turning i think we should have each motor set to the amount that the joystick
+        is tilted so we can have more turn precision if needed so it would be like this
+                Turning
+        if (gamepad1.right_stick_x != 0) {
+            setAllDriveMotorPower(gamepad1.right_stick_x);
+        }*/
+
 
         //Turning
         if (Math.abs(gamepad1.right_stick_x) >= 0.000001) {
