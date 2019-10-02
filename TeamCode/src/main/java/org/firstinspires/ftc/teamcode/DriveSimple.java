@@ -56,11 +56,22 @@ public class DriveSimple extends OpMode{
         // both x and y are equal to one
         //also my spanish homework is so boring and i shud probly be doing that instead
 
+        //changing for normalized values now
+
+
+        //Normalize the values if the sum is greater than one to fit motor power
+        double x = gamepad1.left_stick_x, y = gamepad1.left_stick_y, sum = Math.abs(x) + Math.abs(y);
+        if (sum > 1) {
+            double newx = x / (x + y), newy = y / (x + y);
+            x = newx;
+            y = newy;
+        }
+
         //Driving
-        leftFront.setPower(gamepad1.left_stick_x + gamepad1.left_stick_y);
-        rightFront.setPower(gamepad1.left_stick_x - gamepad1.left_stick_y);
-        leftBack.setPower(-gamepad1.left_stick_x + gamepad1.left_stick_y);
-        rightBack.setPower(-gamepad1.left_stick_x - gamepad1.left_stick_y);
+        leftFront.setPower(x + y);
+        rightFront.setPower(x - y);
+        leftBack.setPower(-x + y);
+        rightBack.setPower(-x - y);
 
 
 
@@ -70,15 +81,11 @@ public class DriveSimple extends OpMode{
         if (gamepad1.right_stick_x != 0) {
             setAllDriveMotorPower(gamepad1.right_stick_x);
         }*/
-
+        //Kevin did it
 
         //Turning
         if (Math.abs(gamepad1.right_stick_x) >= 0.000001) {
-            if (gamepad1.right_stick_x > 0) {
-                setAllDriveMotorPower(1);
-            } else if (gamepad1.right_stick_x < 0) {
-                setAllDriveMotorPower(-1);
-            }
+            setAllDriveMotorPower(gamepad1.right_stick_x);
         }
 
         //Display runtime
