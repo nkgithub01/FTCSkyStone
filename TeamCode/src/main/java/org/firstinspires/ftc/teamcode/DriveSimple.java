@@ -60,6 +60,7 @@ public class DriveSimple extends OpMode{
             y = newy;
         }
 
+        //sahith testing
         //Driving
         leftFront.setPower(x + y);
         rightFront.setPower(x - y);
