@@ -60,7 +60,10 @@ public class DriveSimple extends OpMode{
 
 
         //Normalize the values if the sum is greater than one to fit motor power
-        double x = gamepad1.left_stick_x, y = gamepad1.left_stick_y, sum = Math.abs(x) + Math.abs(y);
+        double x = gamepad1.left_stick_x;
+        double y = gamepad1.left_stick_y;
+        double sum = Math.abs(x) + Math.abs(y);
+
         if (sum > 1) {
             double newx = x / (x + y), newy = y / (x + y);
             x = newx;
