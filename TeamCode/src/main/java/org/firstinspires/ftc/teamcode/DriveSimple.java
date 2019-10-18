@@ -73,6 +73,8 @@ public class DriveSimple extends OpMode{
 
         //Display runtime
         telemetry.addData("Runtime: ", getRuntime());
+        telemetry.addData("x: ", x);
+        telemetry.addData("y: ", y);
     }
 
     public void setAllDriveMotorPower(double power) {
