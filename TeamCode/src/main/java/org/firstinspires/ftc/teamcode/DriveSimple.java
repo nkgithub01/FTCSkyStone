@@ -64,14 +64,14 @@ public class DriveSimple extends OpMode{
         }
         
         //Driving
-        leftFront.setPower(x + y);
-        rightFront.setPower(x - y);
-        leftBack.setPower(-x + y);
-        rightBack.setPower(-x - y);
+        leftFront.setPower(-x + y);
+        rightFront.setPower(-x - y);
+        leftBack.setPower(x + y);
+        rightBack.setPower(x - y);
 
         //Turning
         if (Math.abs(gamepad1.right_stick_x) >= 0.000001) {
-            setAllDriveMotorPower(gamepad1.right_stick_x);
+            setAllDriveMotorPower(-gamepad1.right_stick_x);
         }
 
         //Display runtime
