@@ -16,6 +16,9 @@ public class DriveSimple extends OpMode{
     DcMotor rightBack = null;
     DcMotor rightFront = null;
 
+    //Variables
+    double speedMultiplier;
+    boolean aPressed;
 
     @Override
     public void init() {
@@ -37,6 +40,10 @@ public class DriveSimple extends OpMode{
         leftFront.setDirection(DcMotor.Direction.FORWARD);
         rightBack.setDirection(DcMotor.Direction.FORWARD);
         rightFront.setDirection(DcMotor.Direction.FORWARD);
+
+        //Initialize the variables
+        speedMultiplier = 1;
+        aPressed = false;
 
         //Tell user that initialization is complete
         telemetry.addData("Status", "Initialized");
@@ -62,7 +69,10 @@ public class DriveSimple extends OpMode{
             x = newx;
             y = newy;
         }
-        
+
+        x *= speedMultiplier;
+        y *= speedMultiplier;
+
         //Driving
         leftFront.setPower(-x + y);
         rightFront.setPower(-x - y);
@@ -72,6 +82,17 @@ public class DriveSimple extends OpMode{
         //Turning
         if (Math.abs(gamepad1.right_stick_x) >= 0.000001) {
             setAllDriveMotorPower(-gamepad1.right_stick_x);
+        }
+
+        //If A is not pressed
+        if (!gamepad1.a) {
+            aPressed = false;
+        }
+
+        //Toggle the speed multiplier
+        if (gamepad1.a && !aPressed) {
+            speedMultiplier = 1.5 - speedMultiplier;
+            aPressed = true;
         }
 
         //Display runtime
