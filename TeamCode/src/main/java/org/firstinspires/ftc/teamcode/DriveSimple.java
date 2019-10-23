@@ -91,7 +91,7 @@ public class DriveSimple extends OpMode{
 
         //Toggle the speed multiplier
         if (gamepad1.a && !aPressed) {
-            speedMultiplier = 1.5 - speedMultiplier;
+            speedMultiplier = 1.2 - speedMultiplier;
             aPressed = true;
         }
 
@@ -99,6 +99,7 @@ public class DriveSimple extends OpMode{
         telemetry.addData("Runtime: ", getRuntime());
         telemetry.addData("x: ", x);
         telemetry.addData("y: ", y);
+        telemetry.addData("speed multiplier: ", speedMultiplier);
     }
 
     public void setAllDriveMotorPower(double power) {
