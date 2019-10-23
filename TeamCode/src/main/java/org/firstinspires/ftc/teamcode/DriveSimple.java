@@ -58,7 +58,7 @@ public class DriveSimple extends OpMode{
         double sum = Math.abs(x) + Math.abs(y);
 
         if (sum > 1) {
-            double newx = x / (x + y), newy = y / (x + y);
+            double newx = x / sum, newy = y / sum;
             x = newx;
             y = newy;
         }
