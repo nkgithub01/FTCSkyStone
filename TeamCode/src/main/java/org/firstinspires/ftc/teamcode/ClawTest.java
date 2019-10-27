@@ -5,20 +5,38 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.Servo;
 
 @TeleOp(name = "Test", group = "OpMode")
-public class Test extends OpMode {
+public class ClawTest extends OpMode {
 
-    boolean aPressed = false;
-    boolean closed = false;
+    //Servos
+    Servo claw;
+
+    //Variables
+    boolean aPressed;
+    boolean closed;
+
 
     @Override
     public void init() {
+
+        //Initialize Servo
+        claw = hardwareMap.get(Servo.class, "claw");
+
+        //Set servo direction
+        claw.setDirection(Servo.Direction.FORWARD);
+
+        //Initial position
+        claw.setPosition(0.2);
+
+        //Initialize variables
+        aPressed = false;
+        closed = false;
+
     }
 
     @Override
     public void loop(){
-        Servo claw = hardwareMap.get(Servo.class, "claw");
-        claw.setDirection(Servo.Direction.FORWARD);
 
+        //Control claw
         if(!gamepad1.a) aPressed = false;
         if(gamepad1.a && !aPressed)
         {
@@ -35,6 +53,7 @@ public class Test extends OpMode {
             }
         }
 
+        //Add data
         telemetry.addData("X: ", gamepad1.left_stick_x);
         telemetry.addData("y: ", gamepad1.left_stick_y);
     }
