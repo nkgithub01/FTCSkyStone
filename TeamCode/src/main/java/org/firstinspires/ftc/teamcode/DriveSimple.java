@@ -11,10 +11,10 @@ public class DriveSimple extends OpMode{
     ElapsedTime runtime = new ElapsedTime();
 
     //Motors
-    DcMotor leftBack;
-    DcMotor leftFront;
-    DcMotor rightBack;
-    DcMotor rightFront;
+    DcMotor leftBack; //port 3
+    DcMotor leftFront; //port 0
+    DcMotor rightBack; //port 1
+    DcMotor rightFront; //port 2
 
     //Variables
     double speedMultiplier;
