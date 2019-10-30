@@ -1,3 +1,4 @@
+//With this statement I acknowledge that this work is my own and that I have not shared it with anyone
 package org.firstinspires.ftc.teamcode;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
@@ -29,6 +30,8 @@ public class ClawDrive extends OpMode{
     boolean aPressed_1;
     boolean aPressed_2;
     boolean clawClosed;
+    final int minPos = -10000;
+    final int maxPos = 10000;
 
     @Override
     public void init() {
@@ -56,6 +59,9 @@ public class ClawDrive extends OpMode{
         rightFront.setDirection(DcMotor.Direction.FORWARD);
 
         rnpUp.setDirection(DcMotor.Direction.FORWARD);
+
+        //Set run mode
+        rnpUp.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
         //Initialize Servos
         clawTurn = hardwareMap.get(Servo.class, "clawTurn");
@@ -163,7 +169,11 @@ public class ClawDrive extends OpMode{
         //Moving the claw arm
 
         //Move the arm up and down
-        //tba
+        int position = rnpUp.getCurrentPosition();
+        double pwr = gamepad2.left_stick_y, newPos = pwr * 10 + position;
+        if (newPos < maxPos) {
+            rnpUp.setTargetPosition((int) (newPos));
+        }
 
         //Move the claw forwards and backwards
         double power = gamepad2.right_stick_x;
@@ -177,6 +187,7 @@ public class ClawDrive extends OpMode{
         telemetry.addData("x: ", x);
         telemetry.addData("y: ", y);
         telemetry.addData("speed multiplier: ", speedMultiplier);
+        telemetry.addData("")
     }
 
     public void setAllDriveMotorPower(double power) {
@@ -196,7 +207,7 @@ public class ClawDrive extends OpMode{
         Press A to toggle speed multiplier
 
     Gamepad2(Claw/Claw Arm):
-        Left joystick to move the claw arm up
+        Left joystick to move the claw arm up and down
         Right joystick to move the claw forwards and backwards
         Press A to open and close the claw
         Use triggers to rotate the claw
