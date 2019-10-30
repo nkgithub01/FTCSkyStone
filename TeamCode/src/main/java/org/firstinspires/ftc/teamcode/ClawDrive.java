@@ -187,7 +187,8 @@ public class ClawDrive extends OpMode{
         telemetry.addData("x: ", x);
         telemetry.addData("y: ", y);
         telemetry.addData("speed multiplier: ", speedMultiplier);
-        telemetry.addData("")
+        telemetry.addData("position", position);
+        telemetry.addData("new pos", newPos);
     }
 
     public void setAllDriveMotorPower(double power) {
