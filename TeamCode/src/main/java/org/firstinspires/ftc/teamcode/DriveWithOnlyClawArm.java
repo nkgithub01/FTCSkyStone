@@ -1,4 +1,3 @@
-//With this statement I acknowledge that this work is my own and that I have not shared it with anyone
 package org.firstinspires.ftc.teamcode;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
@@ -6,8 +5,8 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.hardware.Servo;
 
-@TeleOp(name="DriveSimple", group="OpMode")
-public class ClawDrive extends OpMode{
+@TeleOp(name="DriveWithOnlyClawArm", group="OpMode")
+public class DriveWithOnlyClawArm extends OpMode{
 
     //Objects
     ElapsedTime runtime = new ElapsedTime();
@@ -20,16 +19,9 @@ public class ClawDrive extends OpMode{
 
     DcMotor rnpUp;
 
-    //Servos
-    Servo clawTurn;
-    Servo claw;
-    Servo rnpOut;
-
     //Variables
     double speedMultiplier;
     boolean aPressed_1;
-    boolean aPressed_2;
-    boolean clawClosed;
     final int minPos = -10000;
     final int maxPos = 10000;
 
@@ -63,26 +55,9 @@ public class ClawDrive extends OpMode{
         //Set run mode
         rnpUp.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
-        //Initialize Servos
-        clawTurn = hardwareMap.get(Servo.class, "clawTurn");
-        claw = hardwareMap.get(Servo.class, "claw");
-        rnpOut = hardwareMap.get(Servo.class, "rnpOut");
-
-        //Set directions of the servos
-        clawTurn.setDirection(Servo.Direction.FORWARD);
-        claw.setDirection(Servo.Direction.FORWARD);
-        rnpOut.setDirection(Servo.Direction.FORWARD);
-
-        //Initial position
-        clawTurn.setPosition(0.2);
-        claw.setPosition(0.2);
-        rnpOut.setPosition(0.2);
-
         //Initialize the variables
         speedMultiplier = 1;
         aPressed_1 = false;
-        aPressed_2 = false;
-        clawClosed = false;
 
         //Tell user that initialization is complete
         telemetry.addData("Status", "Initialized");
@@ -134,38 +109,6 @@ public class ClawDrive extends OpMode{
             aPressed_1 = true;
         }
 
-        //Control claw
-
-        //If A on gamepad2 is not pressed
-        if(!gamepad2.a) {
-            aPressed_2 = false;
-        }
-
-        //Open and close the claw
-        if(gamepad2.a && !aPressed_2)
-        {
-            aPressed_2 = true;
-            if(clawClosed)
-            {
-                claw.setPosition(0.7);
-                clawClosed = false;
-            }
-            else
-            {
-                claw.setPosition(0.2);
-                clawClosed = true;
-            }
-        }
-
-        //Rotate the claw
-        double dist = 0;
-        dist += gamepad2.left_trigger;
-        dist -= gamepad2.right_trigger;
-        double newDist = dist / 100 + clawTurn.getPosition();
-        if (Math.abs(newDist) < 1) {
-            clawTurn.setPosition(newDist);
-        }
-
         //Moving the claw arm
 
         //Move the arm up and down
@@ -173,13 +116,6 @@ public class ClawDrive extends OpMode{
         double pwr = gamepad2.left_stick_y, newPos = pwr * 10 + position;
         if (newPos < maxPos) {
             rnpUp.setTargetPosition((int) (newPos));
-        }
-
-        //Move the claw forwards and backwards
-        double power = gamepad2.right_stick_x;
-        double extension = power / 100 + rnpOut.getPosition();
-        if (Math.abs(extension) < 1) {
-            rnpOut.setPosition(extension);
         }
 
         //Display data
@@ -209,9 +145,6 @@ public class ClawDrive extends OpMode{
 
     Gamepad2(Claw/Claw Arm):
         Left joystick to move the claw arm up and down
-        Right joystick to move the claw forwards and backwards
-        Press A to open and close the claw
-        Use triggers to rotate the claw
 
      */
 
