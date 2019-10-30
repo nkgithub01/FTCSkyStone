@@ -21,8 +21,8 @@ public class DriveWithOnlyClawArm extends OpMode{
     //Variables
     double speedMultiplier;
     boolean aPressed_1;
-    final int minPos = -10000;
-    final int maxPos = 10000;
+    final int minPos = -2500;
+    final int maxPos = 5000;
 
     @Override
     public void init() {
@@ -112,10 +112,11 @@ public class DriveWithOnlyClawArm extends OpMode{
 
         //Move the arm up and down
         int position = rnpUp.getCurrentPosition();
-        double pwr = gamepad2.left_stick_y;
-        int newPos = (int) (pwr * 10) + position;
+        double pwr = -gamepad2.left_stick_y;
+        int newPos = (int) (pwr * 100) + position;
         if (minPos < newPos && newPos < maxPos) {
             rnpUp.setTargetPosition(newPos);
+            rnpUp.setPower(pwr);
         }
 
         //Display data
