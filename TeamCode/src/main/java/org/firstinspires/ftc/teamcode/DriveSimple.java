@@ -13,8 +13,8 @@ public class DriveSimple extends OpMode{
     //Motors
     DcMotor leftBack; //port 3
     DcMotor leftFront; //port 0
-    DcMotor rightBack; //port 1
-    DcMotor rightFront; //port 2
+    DcMotor rightBack; //port 2
+    DcMotor rightFront; //port 1
 
     //Variables
     double speedMultiplier;

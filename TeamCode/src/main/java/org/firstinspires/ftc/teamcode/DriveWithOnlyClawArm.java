@@ -13,8 +13,8 @@ public class DriveWithOnlyClawArm extends OpMode{
     //Motors
     DcMotor leftBack; //port 3
     DcMotor leftFront; //port 0
-    DcMotor rightBack; //port 1
-    DcMotor rightFront; //port 2
+    DcMotor rightBack; //port 2
+    DcMotor rightFront; //port 1
 
     DcMotor rnpUp;
 
@@ -52,7 +52,7 @@ public class DriveWithOnlyClawArm extends OpMode{
         rnpUp.setDirection(DcMotor.Direction.FORWARD);
 
         //Set run mode
-        rnpUp.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        rnpUp.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
         //Initialize the variables
         speedMultiplier = 1;
@@ -112,9 +112,10 @@ public class DriveWithOnlyClawArm extends OpMode{
 
         //Move the arm up and down
         int position = rnpUp.getCurrentPosition();
-        double pwr = gamepad2.left_stick_y, newPos = pwr * 10 + position;
-        if (newPos < maxPos) {
-            rnpUp.setTargetPosition((int) (newPos));
+        double pwr = gamepad2.left_stick_y;
+        int newPos = (int) (pwr * 10) + position;
+        if (minPos < newPos && newPos < maxPos) {
+            rnpUp.setTargetPosition(newPos);
         }
 
         //Display data
