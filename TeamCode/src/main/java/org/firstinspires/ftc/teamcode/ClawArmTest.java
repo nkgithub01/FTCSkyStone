@@ -49,7 +49,7 @@ public class ClawArmTest extends OpMode{
         //Move the arm up and down
         int position = rnpUp.getCurrentPosition();
         double pwr = -gamepad2.left_stick_y;
-        int newPos = (int) (pwr * 100) + position;
+        int newPos = (int) (pwr * 200) + position;
         if (minPos < newPos && newPos < maxPos) {
             rnpUp.setTargetPosition(newPos);
             rnpUp.setPower(pwr);
