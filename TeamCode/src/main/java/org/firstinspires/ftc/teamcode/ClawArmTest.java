@@ -2,7 +2,6 @@ package org.firstinspires.ftc.teamcode;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 @TeleOp(name="ClawArmTest", group="OpMode")
@@ -16,8 +15,8 @@ public class ClawArmTest extends OpMode{
     DcMotor rnpUp2;
 
     //Variables
-    int minPos = 10;
-    int maxPos = 4200;
+    int minPos = 0;
+    int maxPos = 3800;
 
     boolean downPressed = false;
     boolean upPressed = false;
@@ -115,4 +114,5 @@ public class ClawArmTest extends OpMode{
         telemetry.addData("position 2: ", position2);
         telemetry.addData("new pos 2: ", newPos2);
     }
+
 }
