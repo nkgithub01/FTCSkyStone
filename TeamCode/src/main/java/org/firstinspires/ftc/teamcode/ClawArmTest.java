@@ -15,8 +15,8 @@ public class ClawArmTest extends OpMode{
     DcMotor rnpUp2;
 
     //Variables
-    final int minPos = 100;
-    final int maxPos = 4600;
+    final int minPos = -4600;
+    final int maxPos = 100;
 
     @Override
     public void init() {
