@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 @TeleOp(name="ClawArmTest", group="OpMode")
@@ -15,8 +16,13 @@ public class ClawArmTest extends OpMode{
     DcMotor rnpUp2;
 
     //Variables
-    final int minPos = -4600;
-    final int maxPos = 100;
+    int minPos = 10;
+    int maxPos = 4200;
+
+    boolean downPressed = false;
+    boolean upPressed = false;
+    boolean leftPressed = false;
+    boolean rightPressed = false;
 
     @Override
     public void init() {
@@ -30,8 +36,8 @@ public class ClawArmTest extends OpMode{
         rnpUp2.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
         //Set directions of the motors
-        rnpUp1.setDirection(DcMotor.Direction.FORWARD);
-        rnpUp2.setDirection(DcMotor.Direction.REVERSE);
+        rnpUp1.setDirection(DcMotor.Direction.REVERSE);
+        rnpUp2.setDirection(DcMotor.Direction.FORWARD);
 
         //Set run mode
         rnpUp1.setMode(DcMotor.RunMode.RUN_TO_POSITION);
@@ -64,6 +70,38 @@ public class ClawArmTest extends OpMode{
         if (minPos < newPos2 && newPos2 < maxPos) {
             rnpUp2.setTargetPosition(newPos2);
             rnpUp2.setPower(pwr);
+        }
+
+        if (gamepad2.dpad_down && !downPressed) {
+            maxPos -= 100;
+            downPressed = true;
+        }
+        if (!gamepad2.dpad_down) {
+            downPressed = false;
+        }
+
+        if (gamepad2.dpad_up && !upPressed) {
+            maxPos += 100;
+            upPressed = true;
+        }
+        if (!gamepad2.dpad_up) {
+            upPressed = false;
+        }
+
+        if (gamepad2.dpad_left && !leftPressed) {
+            minPos -= 100;
+            leftPressed = true;
+        }
+        if (!gamepad2.dpad_left) {
+            leftPressed = false;
+        }
+
+        if (gamepad2.dpad_right && !rightPressed) {
+            minPos += 100;
+            rightPressed = true;
+        }
+        if (!gamepad2.dpad_right) {
+            rightPressed = false;
         }
 
         //Display data
