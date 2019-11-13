@@ -115,5 +115,4 @@ public class ClawArmTest extends OpMode{
         telemetry.addData("position 2: ", position2);
         telemetry.addData("new pos 2: ", newPos2);
     }
-
 }
