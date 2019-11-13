@@ -68,8 +68,11 @@ public class ClawArmTest extends OpMode{
 
         //Display data
         telemetry.addData("Runtime: ", getRuntime());
-        telemetry.addData("position", position1);
-        telemetry.addData("new pos", newPos1);
+        telemetry.addData("min pos: ", minPos);
+        telemetry.addData("max pos: ", maxPos);
+
+        telemetry.addData("position 1: ", position1);
+        telemetry.addData("new pos 1: ", newPos1);
 
         telemetry.addData("position 2: ", position2);
         telemetry.addData("new pos 2: ", newPos2);
