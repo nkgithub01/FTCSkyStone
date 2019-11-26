@@ -15,8 +15,8 @@ public class RackAndPinionArm extends OpMode{
     DcMotor rnpUp2;
 
     //Variables
-    int minPos = 0;
-    int maxPos = -3800;
+    int minPos = -3800;
+    int maxPos = 0;
 
     boolean downPressed = false;
     boolean upPressed = false;
