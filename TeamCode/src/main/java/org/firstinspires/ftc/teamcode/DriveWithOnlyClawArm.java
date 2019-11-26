@@ -16,13 +16,20 @@ public class DriveWithOnlyClawArm extends OpMode{
     DcMotor rightBack; //port 2
     DcMotor rightFront; //port 1
 
-    DcMotor rnpUp;
+    DcMotor rnpUp1;
+    DcMotor rnpUp2;
 
     //Variables
+    int minPos;
+    int maxPos;
+
     double speedMultiplier;
+
     boolean aPressed_1;
-    final int minPos = -2500;
-    final int maxPos = 5000;
+    boolean downPressed = false;
+    boolean upPressed = false;
+    boolean leftPressed = false;
+    boolean rightPressed = false;
 
     @Override
     public void init() {
@@ -33,7 +40,8 @@ public class DriveWithOnlyClawArm extends OpMode{
         rightBack = hardwareMap.get(DcMotor.class, "rightBack");
         rightFront = hardwareMap.get(DcMotor.class, "rightFront");
 
-        rnpUp = hardwareMap.get(DcMotor.class, "rnpUp");
+        rnpUp1 = hardwareMap.get(DcMotor.class, "rnpUp1");
+        rnpUp2 = hardwareMap.get(DcMotor.class, "rnpUp2");
 
         //Set zero power behavior
         leftBack.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
@@ -41,7 +49,8 @@ public class DriveWithOnlyClawArm extends OpMode{
         rightBack.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         rightFront.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
-        rnpUp.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        rnpUp1.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        rnpUp2.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
         //Set directions of the motors
         leftBack.setDirection(DcMotor.Direction.FORWARD);
@@ -49,14 +58,18 @@ public class DriveWithOnlyClawArm extends OpMode{
         rightBack.setDirection(DcMotor.Direction.FORWARD);
         rightFront.setDirection(DcMotor.Direction.FORWARD);
 
-        rnpUp.setDirection(DcMotor.Direction.FORWARD);
+        rnpUp1.setDirection(DcMotor.Direction.REVERSE);
+        rnpUp2.setDirection(DcMotor.Direction.FORWARD);
 
         //Set run mode
-        rnpUp.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        rnpUp1.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        rnpUp2.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
         //Initialize the variables
         speedMultiplier = 1;
         aPressed_1 = false;
+        minPos = 0;
+        maxPos = 3800;
 
         //Tell user that initialization is complete
         telemetry.addData("Status", "Initialized");
@@ -111,21 +124,66 @@ public class DriveWithOnlyClawArm extends OpMode{
         //Moving the claw arm
 
         //Move the arm up and down
-        int position = rnpUp.getCurrentPosition();
+        int position1 = rnpUp1.getCurrentPosition();
+        int position2 = rnpUp2.getCurrentPosition();
         double pwr = -gamepad2.left_stick_y;
-        int newPos = (int) (pwr * 100) + position;
-        if (minPos < newPos && newPos < maxPos) {
-            rnpUp.setTargetPosition(newPos);
-            rnpUp.setPower(pwr);
+        int newPos1 = (int) (pwr * 200) + position1;
+        if (minPos < newPos1 && newPos1 < maxPos) {
+            rnpUp1.setTargetPosition(newPos1);
+            rnpUp1.setPower(pwr);
+        }
+
+        int newPos2 = (int) (pwr*200) + position2;
+        if (minPos < newPos2 && newPos2 < maxPos) {
+            rnpUp2.setTargetPosition(newPos2);
+            rnpUp2.setPower(pwr);
+        }
+
+        //Change limits
+        if (gamepad2.dpad_down && !downPressed) {
+            maxPos -= 100;
+            downPressed = true;
+        }
+        if (!gamepad2.dpad_down) {
+            downPressed = false;
+        }
+
+        if (gamepad2.dpad_up && !upPressed) {
+            maxPos += 100;
+            upPressed = true;
+        }
+        if (!gamepad2.dpad_up) {
+            upPressed = false;
+        }
+
+        if (gamepad2.dpad_left && !leftPressed) {
+            minPos -= 100;
+            leftPressed = true;
+        }
+        if (!gamepad2.dpad_left) {
+            leftPressed = false;
+        }
+
+        if (gamepad2.dpad_right && !rightPressed) {
+            minPos += 100;
+            rightPressed = true;
+        }
+        if (!gamepad2.dpad_right) {
+            rightPressed = false;
         }
 
         //Display data
         telemetry.addData("Runtime: ", getRuntime());
+
         telemetry.addData("x: ", x);
         telemetry.addData("y: ", y);
         telemetry.addData("speed multiplier: ", speedMultiplier);
-        telemetry.addData("position", position);
-        telemetry.addData("new pos", newPos);
+
+        telemetry.addData("position 1: ", position1);
+        telemetry.addData("new pos 1: ", newPos1);
+
+        telemetry.addData("position 2: ", position2);
+        telemetry.addData("new pos 2: ", newPos2);
     }
 
     public void setAllDriveMotorPower(double power) {
@@ -146,6 +204,7 @@ public class DriveWithOnlyClawArm extends OpMode{
 
     Gamepad2(Claw/Claw Arm):
         Left joystick to move the claw arm up and down
+        Left gamepad to change min and max limits
 
      */
 

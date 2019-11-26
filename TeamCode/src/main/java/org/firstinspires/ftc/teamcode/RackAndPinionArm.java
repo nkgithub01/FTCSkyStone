@@ -15,8 +15,8 @@ public class RackAndPinionArm extends OpMode{
     DcMotor rnpUp2;
 
     //Variables
-    int minPos = -3800;
-    int maxPos = 0;
+    int minPos = 0;
+    int maxPos = 3800;
 
     boolean downPressed = false;
     boolean upPressed = false;
@@ -41,6 +41,7 @@ public class RackAndPinionArm extends OpMode{
         //Set run mode
         rnpUp1.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         rnpUp2.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
         //Tell user that initialization is complete
         telemetry.addData("Status", "Initialized");
 
@@ -58,7 +59,7 @@ public class RackAndPinionArm extends OpMode{
         //Move the arm up and down
         int position1 = rnpUp1.getCurrentPosition();
         int position2 = rnpUp2.getCurrentPosition();
-        double pwr = gamepad2.left_stick_y;
+        double pwr = -gamepad2.left_stick_y;
         int newPos1 = (int) (pwr * 200) + position1;
         if (minPos < newPos1 && newPos1 < maxPos) {
             rnpUp1.setTargetPosition(newPos1);
@@ -71,6 +72,7 @@ public class RackAndPinionArm extends OpMode{
             rnpUp2.setPower(pwr);
         }
 
+        //Change limits
         if (gamepad2.dpad_down && !downPressed) {
             maxPos -= 100;
             downPressed = true;
