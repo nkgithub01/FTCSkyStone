@@ -4,8 +4,8 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
-@TeleOp(name="ClawArmTest", group="OpMode")
-public class ClawArmTest extends OpMode{
+@TeleOp(name="RackAndPinionArm", group="OpMode")
+public class RackAndPinionArm extends OpMode{
 
     //Objects
     ElapsedTime runtime = new ElapsedTime();
@@ -16,7 +16,7 @@ public class ClawArmTest extends OpMode{
 
     //Variables
     int minPos = 0;
-    int maxPos = 3800;
+    int maxPos = -3800;
 
     boolean downPressed = false;
     boolean upPressed = false;
@@ -58,18 +58,18 @@ public class ClawArmTest extends OpMode{
         //Move the arm up and down
         int position1 = rnpUp1.getCurrentPosition();
         int position2 = rnpUp2.getCurrentPosition();
-        double pwr = -gamepad2.left_stick_y;
+        double pwr = gamepad2.left_stick_y;
         int newPos1 = (int) (pwr * 200) + position1;
-        //if (minPos < newPos1 && newPos1 < maxPos) {
+        if (minPos < newPos1 && newPos1 < maxPos) {
             rnpUp1.setTargetPosition(newPos1);
             rnpUp1.setPower(pwr);
-        //}
+        }
 
         int newPos2 = (int) (pwr*200) + position2;
-        //if (minPos < newPos2 && newPos2 < maxPos) {
+        if (minPos < newPos2 && newPos2 < maxPos) {
             rnpUp2.setTargetPosition(newPos2);
             rnpUp2.setPower(pwr);
-        //}
+        }
 
         if (gamepad2.dpad_down && !downPressed) {
             maxPos -= 100;
