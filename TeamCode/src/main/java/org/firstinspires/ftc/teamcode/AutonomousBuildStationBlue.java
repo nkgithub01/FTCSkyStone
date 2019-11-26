@@ -8,8 +8,8 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
-@Autonomous(name="AutonomousPlayerStation", group="OpMode")
-public class AutonomousPlayerStation extends LinearOpMode {
+@Autonomous(name="AutonomousBuildStationBlue", group="OpMode")
+public class AutonomousBuildStationBlue extends LinearOpMode {
 
     //Objects
     ElapsedTime runtime = new ElapsedTime();
@@ -90,6 +90,7 @@ public class AutonomousPlayerStation extends LinearOpMode {
         telemetry.addData("Status", "Initialized");
 
         waitForStart();
+
 
     }
 
