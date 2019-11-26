@@ -22,6 +22,10 @@ public class AutonomousDepotBlue extends LinearOpMode{
     DcMotor rnpUp1;
     DcMotor rnpUp2;
 
+    //Sensors
+    ColorSensor colorSensorFront;
+    ColorSensor colorSensorBack;
+
     @Override
     public void runOpMode() {
 
@@ -55,6 +59,10 @@ public class AutonomousDepotBlue extends LinearOpMode{
         //Set run mode
         rnpUp1.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         rnpUp2.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+        //Initialize sensors
+        colorSensorFront = hardwareMap.get(ColorSensor.class, "colorSensorFront");
+        colorSensorBack = hardwareMap.get(ColorSensor.class, "colorSensorBack");
 
         //Tell user that initialization is complete
         telemetry.addData("Status", "Initialized");
