@@ -1,15 +1,14 @@
 package org.firstinspires.ftc.teamcode;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
-@Autonomous(name="AutonomousBuildStationRed", group="Autonomous")
-public class AutonomousBuildStationRed extends LinearOpMode {
+@TeleOp(name="AutonomousBuildStationRed", group="Autonomous")
+public class AutonomousBuildStationRed extends LinearOpMode{
 
     //Objects
     ElapsedTime runtime = new ElapsedTime();
@@ -20,22 +19,10 @@ public class AutonomousBuildStationRed extends LinearOpMode {
     DcMotor rightBack; //port 2
     DcMotor rightFront; //port 1
 
-    DcMotor rnpUp;
+    DcMotor rnpUp1;
+    DcMotor rnpUp2;
 
-    //Servos
-    Servo clawTurn;
-    Servo claw;
-    Servo rnpOut;
-
-    //Variables
-    double speedMultiplier;
-    boolean aPressed_1;
-    boolean aPressed_2;
-    boolean clawClosed;
-    final int minPos = -10000;
-    final int maxPos = 10000;
-
-    //Initialize the variables
+    @Override
     public void runOpMode() {
 
         //Initialize DcMotors
@@ -44,7 +31,8 @@ public class AutonomousBuildStationRed extends LinearOpMode {
         rightBack = hardwareMap.get(DcMotor.class, "rightBack");
         rightFront = hardwareMap.get(DcMotor.class, "rightFront");
 
-        rnpUp = hardwareMap.get(DcMotor.class, "rnpUp");
+        rnpUp1 = hardwareMap.get(DcMotor.class, "rnpUp1");
+        rnpUp2 = hardwareMap.get(DcMotor.class, "rnpUp2");
 
         //Set zero power behavior
         leftBack.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
@@ -52,7 +40,8 @@ public class AutonomousBuildStationRed extends LinearOpMode {
         rightBack.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         rightFront.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
-        rnpUp.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        rnpUp1.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        rnpUp2.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
         //Set directions of the motors
         leftBack.setDirection(DcMotor.Direction.FORWARD);
@@ -60,38 +49,24 @@ public class AutonomousBuildStationRed extends LinearOpMode {
         rightBack.setDirection(DcMotor.Direction.FORWARD);
         rightFront.setDirection(DcMotor.Direction.FORWARD);
 
-        rnpUp.setDirection(DcMotor.Direction.FORWARD);
+        rnpUp1.setDirection(DcMotor.Direction.REVERSE);
+        rnpUp2.setDirection(DcMotor.Direction.FORWARD);
 
         //Set run mode
-        rnpUp.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-
-        //Initialize Servos
-        clawTurn = hardwareMap.get(Servo.class, "clawTurn");
-        claw = hardwareMap.get(Servo.class, "claw");
-        rnpOut = hardwareMap.get(Servo.class, "rnpOut");
-
-        //Set directions of the servos
-        clawTurn.setDirection(Servo.Direction.FORWARD);
-        claw.setDirection(Servo.Direction.FORWARD);
-        rnpOut.setDirection(Servo.Direction.FORWARD);
-
-        //Initial position
-        clawTurn.setPosition(0.2);
-        claw.setPosition(0.2);
-        rnpOut.setPosition(0.2);
-
-        //Initialize the variables
-        speedMultiplier = 1;
-        aPressed_1 = false;
-        aPressed_2 = false;
-        clawClosed = false;
+        rnpUp1.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        rnpUp2.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
         //Tell user that initialization is complete
         telemetry.addData("Status", "Initialized");
 
         waitForStart();
+    }
 
-
+    public void setAllDriveMotorPower(double power) {
+        leftFront.setPower(power);
+        rightFront.setPower(power);
+        leftBack.setPower(power);
+        rightBack.setPower(power);
     }
 
 }
