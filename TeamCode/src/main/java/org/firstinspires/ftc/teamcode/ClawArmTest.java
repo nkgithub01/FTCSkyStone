@@ -60,16 +60,16 @@ public class ClawArmTest extends OpMode{
         int position2 = rnpUp2.getCurrentPosition();
         double pwr = -gamepad2.left_stick_y;
         int newPos1 = (int) (pwr * 200) + position1;
-        if (minPos < newPos1 && newPos1 < maxPos) {
+        //if (minPos < newPos1 && newPos1 < maxPos) {
             rnpUp1.setTargetPosition(newPos1);
             rnpUp1.setPower(pwr);
-        }
+        //}
 
         int newPos2 = (int) (pwr*200) + position2;
-        if (minPos < newPos2 && newPos2 < maxPos) {
+        //if (minPos < newPos2 && newPos2 < maxPos) {
             rnpUp2.setTargetPosition(newPos2);
             rnpUp2.setPower(pwr);
-        }
+        //}
 
         if (gamepad2.dpad_down && !downPressed) {
             maxPos -= 100;
