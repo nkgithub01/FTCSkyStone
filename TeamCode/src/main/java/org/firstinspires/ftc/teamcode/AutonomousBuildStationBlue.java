@@ -8,7 +8,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
-@Autonomous(name="AutonomousBuildStationBlue", group="OpMode")
+@Autonomous(name="AutonomousBuildStationBlue", group="Autonomous")
 public class AutonomousBuildStationBlue extends LinearOpMode {
 
     //Objects
