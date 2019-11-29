@@ -22,6 +22,9 @@ public class AutonomousBuildStationBlue extends LinearOpMode{
     DcMotor rnpUp1;
     DcMotor rnpUp2;
 
+    /**
+     *
+     */
     @Override
     public void runOpMode() {
 
@@ -62,6 +65,10 @@ public class AutonomousBuildStationBlue extends LinearOpMode{
         waitForStart();
     }
 
+    /**
+     * 
+     * @param power
+     */
     public void setAllDriveMotorPower(double power) {
         leftFront.setPower(power);
         rightFront.setPower(power);
