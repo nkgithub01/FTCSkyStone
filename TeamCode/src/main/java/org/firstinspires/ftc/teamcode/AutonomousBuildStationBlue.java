@@ -76,4 +76,35 @@ public class AutonomousBuildStationBlue extends LinearOpMode{
         rightBack.setPower(power);
     }
 
+    public void moveForward(double cm) {
+
+    }
+
+    public void moveBackward(double cm) {
+
+    }
+
+    public void moveLeft(double cm) {
+
+    }
+
+    public void moveRight(double cm) {
+
+    }
+
+    public void rotateRight(double degrees) {
+
+    }
+
+    public void rotateLeft(double degrees) {
+
+    }
+
+    public void setAllDriveMotorPower(double power) {
+        leftFront.setPower(power);
+        rightFront.setPower(power);
+        leftBack.setPower(power);
+        rightBack.setPower(power);
+    }
+    
 }
