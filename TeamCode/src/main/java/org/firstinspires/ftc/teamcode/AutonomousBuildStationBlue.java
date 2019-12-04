@@ -99,12 +99,4 @@ public class AutonomousBuildStationBlue extends LinearOpMode{
     public void rotateLeft(double degrees) {
 
     }
-
-    public void setAllDriveMotorPower(double power) {
-        leftFront.setPower(power);
-        rightFront.setPower(power);
-        leftBack.setPower(power);
-        rightBack.setPower(power);
-    }
-    
 }
