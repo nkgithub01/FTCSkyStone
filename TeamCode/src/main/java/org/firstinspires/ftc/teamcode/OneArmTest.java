@@ -5,7 +5,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 @TeleOp(name="OneArmTest", group="OpMode")
-public class OneArmTest extends OpMode{
+public class OneArmTest extends OpMode {
 
     //Objects
     ElapsedTime runtime = new ElapsedTime();
