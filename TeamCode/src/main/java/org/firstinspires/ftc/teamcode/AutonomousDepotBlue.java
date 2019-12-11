@@ -73,7 +73,7 @@ public class AutonomousDepotBlue extends LinearOpMode{
     }
 
     public void moveForward(double cm) {
-        
+
     }
 
     public void moveBackward(double cm) {
