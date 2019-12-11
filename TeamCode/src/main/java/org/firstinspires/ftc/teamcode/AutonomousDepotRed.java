@@ -62,6 +62,30 @@ public class AutonomousDepotRed extends LinearOpMode{
         waitForStart();
     }
 
+    public void moveForward(double cm) {
+
+    }
+
+    public void moveBackward(double cm) {
+
+    }
+
+    public void moveLeft(double cm) {
+
+    }
+
+    public void moveRight(double cm) {
+
+    }
+
+    public void rotateRight(double degrees) {
+
+    }
+
+    public void rotateLeft(double degrees) {
+
+    }
+
     public void setAllDriveMotorPower(double power) {
         leftFront.setPower(power);
         rightFront.setPower(power);
