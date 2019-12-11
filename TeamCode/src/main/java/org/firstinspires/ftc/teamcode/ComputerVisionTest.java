@@ -106,7 +106,7 @@ public class ComputerVisionTest extends LinearOpMode {
      * and paste it in to your code on the next line, between the double quotes.
      */
     private static final String VUFORIA_KEY =
-            " -- YOUR NEW VUFORIA KEY GOES HERE  --- ";
+            "AVF7JmT/////AAABmf4vuahDSUATvEkgCmJWPUVkWwGEu7I93PMB6nAW7AltjyqP/lFNrq2f5MEHKPyB4wype8C2sRvMg5v5U2zu/rwOtgBfhxZe1b8o7BBktEXt+QMKRlhdYQAz/miqyzB+wnDckgWJAlU3Kv2RqOE9gwuDkyK1W9GdVsI3/PHQ8XT6k8PRt0wg5YXvRbBMw3RdVjy2RNpMBen8+BSqygwu4Bwztle+ZFGZ3efWgzLtk/yyDEwvVDtLYix/r/K6gdel6p1XDhs+upkTaHpfw2tReYPW+fkXLfdLPbpc1Z5Koe9xodIavmCKiLTB/8iMEffKc9DkE3//SV8LuIZqDqjpji3udhXVVGgdKPaaZ3Jpl3iQ";
 
     // Since ImageTarget trackables use mm to specifiy their dimensions, we must use mm for all the physical dimension.
     // We will define some constants and conversions here
