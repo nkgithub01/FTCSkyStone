@@ -7,7 +7,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
-@TeleOp(name="AutonomousDepotBlue", group="Autonomous")
+@Autonomous(name="AutonomousDepotBlue", group="Autonomous")
 public class AutonomousDepotBlue extends LinearOpMode{
 
     //Objects
